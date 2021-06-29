@@ -18,6 +18,7 @@ from .constants import (
     FLASH,
     FREEDOM_FIGHTERS,
     LEGENDS_OF_TOMORROW,
+    STARGIRL,
     SUPERGIRL,
     VIXEN,
     WIKIPEDIA,
@@ -62,8 +63,9 @@ def get_episode_list(series_soup, series):
             ]
         else:
             table_heading = table.find(name='tr', class_=None)
+            # NOTE: The split here is a fix for a reference in the Stargirl air date header
             table_headings = [
-                heading.getText().replace(' ', '').lower()
+                heading.getText().replace(' ', '').lower().split('\u200a', 1)[0]
                 for heading in table_heading.children
             ]
 
@@ -71,11 +73,11 @@ def get_episode_list(series_soup, series):
             title_index = None
             air_date_index = None
             for index, heading in enumerate(table_headings):
-                if 'no.inseason' in heading:
+                if 'no.inseason' in heading or heading == 'no.':
                     episode_num_index = index
                 elif 'title' in heading:
                     title_index = index
-                elif 'originalairdate' in heading:
+                elif 'originalairdate' in heading or 'originalreleasedate' in heading:
                     air_date_index = index
 
             wikipedia_row_unpacker = itemgetter(episode_num_index, title_index, air_date_index)
@@ -141,7 +143,7 @@ def _handle_screening_day_error(episode_list):
 def _handle_air_time_error(episode_list):
     # handles when two episodes air on the same day
     seasons = ['', 'Midseason', 'Midseason', 'Midseason', 'Midseason', 'Midseason', 'Midseason',
-               'Summer', 'Summer', 'Summer', 'Fall', 'Fall', 'Fall']
+               'Summer', 'Summer', 'Fall', 'Fall', 'Fall', 'Fall']
     air_orders = {'Fall 2016': [(LEGENDS_OF_TOMORROW, VIXEN)],
                   'Midseason 2017': [(FLASH, LEGENDS_OF_TOMORROW)],
                   'Fall 2017': [(FLASH, LEGENDS_OF_TOMORROW)],
@@ -152,7 +154,10 @@ def _handle_air_time_error(episode_list):
                   'Midseason 2019': [(ARROW, BLACK_LIGHTNING),
                                      (LEGENDS_OF_TOMORROW, ARROW)],
                   'Fall 2019': [(BATWOMAN, SUPERGIRL),
-                                (FLASH, ARROW)]}
+                                (FLASH, ARROW)],
+                  'Midseason 2020': [(BATWOMAN, SUPERGIRL),
+                                     (ARROW, LEGENDS_OF_TOMORROW),
+                                     (FLASH, LEGENDS_OF_TOMORROW)]}
 
     for i in range(len(episode_list)-1):
         curr_ep = episode_list[i]

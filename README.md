@@ -1,5 +1,5 @@
 # Arrowverse Series Ordering
-[![Build Status](https://travis-ci.org/AceFire6/ordered-arrowverse.svg?branch=master)](https://travis-ci.org/AceFire6/ordered-arrowverse)
+[![Build Status](https://travis-ci.com/vii1/ordered-arrowverse.svg?branch=main)](https://travis-ci.com/vii1/ordered-arrowverse)
 
 This is a project that aims to centralize the series in the Arrowverse that
 have crossovers so as to make it easy to watch the episodes in the correct
@@ -15,11 +15,12 @@ Data is also drawn from Wikipedia when necessary.
 ### Currently Supported Series:
 
 * Arrow
-* The Flash
+* Batwoman
+* Black Lightning
+* Constantine
 * DC's Legends of Tomorrow
+* The Flash
 * Freedom Fighters: The Ray
 * Supergirl
+* Superman & Lois
 * Vixen
-* Constantine
-* Black Lightning
-* Batwoman
