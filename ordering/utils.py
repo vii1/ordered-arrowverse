@@ -73,11 +73,11 @@ def get_episode_list(series_soup, series):
             title_index = None
             air_date_index = None
             for index, heading in enumerate(table_headings):
-                if 'no.inseason' in heading:
+                if 'no.inseason' in heading or heading == 'no.':
                     episode_num_index = index
                 elif 'title' in heading:
                     title_index = index
-                elif 'originalairdate' in heading:
+                elif 'originalairdate' in heading or 'originalreleasedate' in heading:
                     air_date_index = index
 
             wikipedia_row_unpacker = itemgetter(episode_num_index, title_index, air_date_index)

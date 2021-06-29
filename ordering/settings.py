@@ -20,6 +20,7 @@ class Shows(str, Enum):
     FLASH = 'The Flash'
     FREEDOM_FIGHTERS = 'Freedom Fighters: The Ray'
     LEGENDS = "DC's Legends of Tomorrow"
+    STARGIRL = 'Stargirl'
     SUPERGIRL = 'Supergirl'
     SUPERMAN_AND_LOIS = 'Superman & Lois'
     VIXEN = 'Vixen'
@@ -90,7 +91,7 @@ SHOWS = (
     },
     {
         'id': 'stargirl',
-        'name': 'Stargirl',
+        'name': Shows.STARGIRL,
         'url': STARGIRL_URL,
         'root': WIKIPEDIA_ROOT
     },
